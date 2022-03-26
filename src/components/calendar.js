@@ -66,13 +66,12 @@ export default function MyScheduler(props) {
   }
 
   function handleDateSelect(selectInfo) {
-    console.log(name, 'name');
+    console.log(name, 'name', 'selectInfo', selectInfo);
     // let title = prompt('Please enter a new title for your event')
     let title = `${name}'s english lesson`;
     let calendarApi = selectInfo.view.calendar
 
     calendarApi.unselect() // clear date selection
-
     if (title) {
       calendarApi.addEvent({
         id: createEventId(),
@@ -81,6 +80,9 @@ export default function MyScheduler(props) {
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
       })
+      calendarApi.getEvents().forEach(event => {
+        console.log(event.toPlainObject());
+      });
     }
   }
 
